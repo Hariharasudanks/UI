@@ -5,7 +5,7 @@
     margin-top: -20px;
     margin-left: 500px;
     margin-right: 600px;
-}
+}	
 .cardscontent{
 width:100%;
 margin-top: -1.5%;
@@ -14,7 +14,7 @@ display:inline-block;
 
 .parent-wrapper {
 width: 100%;
-
+  
 }
 
 .parent {
@@ -38,11 +38,7 @@ width: 100%;
     height:350px;
     width: calc(100% * (1/4) - 10px - 1px);
 }
-.login {
-    float: right;
-    margin-right: -200px;
-    margin-top: 15px;
-}
+
 .content2 {
   display: flex;
   width: 300px;
@@ -74,7 +70,6 @@ body{
  position: fixed;
 box-shadow:2px 9px 8px #afafafd1;
 }
-
 .top-nav {
 margin-top:0px;
 margin-left:0px;
@@ -84,17 +79,11 @@ top:0;
 height:60px;
 position: sticky;
 }
-
-.top-nav b{
-font-size:25px;
-padding-left: 150px;
-}
-
 input[type=text]{
   border:none;
   height:30px;
    background: transparent;
-
+padding-left:30px;
 }
 
 #bu{
@@ -104,11 +93,9 @@ background-color: white;
 border: none;
 
 }
-.search {
-    color:#6a6c71;;
-    font-style: italic;
-    margin-left: 10px;
-    margin-top: 10px;
+.search{
+margin-left: 10px;
+   margin-top: 10px;
 }
 .search-icon{
 
@@ -133,7 +120,7 @@ color:white;
     background: transparent;
         background-color: transparent;
     background-color: white;
-    font-size: 23	px;
+    font-size: 23px;
     margin-right: 55;
 }
 .top-img {
@@ -148,7 +135,7 @@ color:white;
 .left-sidebar a button{
  height:50px;
  width:60px;
- padding-left:10px;
+ padding-left:10px;	
  font-size:30px;
  border:none;
 background-color: #749EFF;
@@ -159,7 +146,7 @@ background-color: #749EFF;
 font-size:30px;
 color:white;
  background-color:#98B8FD;
-}
+}	
 .fa-users{
  color:white;
  font-size:28px;
@@ -172,11 +159,10 @@ color:white;
 .fa-align-left{
 margin-top:10px;
 color:white;
- font-size:28px;
-border-bottom: 2px solid #749EFF	;
+ font-size:28	px;
 }
 .fa-th-large {
-
+ 
  color:white;
  background-color: #749EFF;
  font-size:28px;
@@ -266,7 +252,7 @@ select {
     color: black;
     width: 200px;
 
-
+  
 }
 .custom-select select {
   display: none; /*hide original SELECT element:*/
@@ -331,7 +317,7 @@ select {
     text-decoration: none;
     display: inline;
     font-size: 17px;
-
+    
 }
 
 .personal {
@@ -356,7 +342,7 @@ border-radius:7.5px;
       margin-left: 10px;
     margin-top: 15px;
   color:white;
-    background-color: #FEDE92;;
+    background-color: #F0D893;;
    width: 70px;
     text-decoration: none;
     display: inline;
@@ -370,7 +356,7 @@ border-radius:7.5px;
     font-size: 15px;
     margin-right: 25px width:30px;
     height: 30px;
-    margin-top: -18px;
+    margin-top: -18px; 
     padding-left:60px;
 }
 .v-centered{
