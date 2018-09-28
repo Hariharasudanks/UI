@@ -10,20 +10,24 @@
   padding: 10px;
   border: 1px solid black;
 }
-body{
- background-color: #F9FAFC;
+body {
+    width: 100%;
+    margin: 0;
+    background-color: black;
 }
 .left-sidebar {
+ display: block;
  background-color: #749EFF;
  left:0;
+ position:fixed;
  overflow:hidden;
  top:0;
  width:60px;
  height:100%;
  margin-left:0px;
  z-index: 1000;
- position: fixed;
-box-shadow:2px 9px 8px #afafafd1;
+
+box-shadow:0px 0px px #afafafd1;
 }
 ul {
     list-style: none;
@@ -42,6 +46,9 @@ position: sticky;
 .top-nav b{
 font-size:25px;
 padding-left: 200px;
+}
+.fa-bars{
+display:none;
 }
 
 input[type=text]{
@@ -87,6 +94,19 @@ font-size: 13px;
 padding: 1.5px;
 padding-left: 3px;
 padding-right: 3px;
+}
+
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
 }
 .fa-headphones{
 font-size:28px;
@@ -167,7 +187,7 @@ height: auto;
 
 .cardscontent{
     background-color: red;
-    padding-left: 70px;
+
 }
 .bold-content {
     color: grey;
@@ -192,6 +212,11 @@ font-size:75px;
  display: inline-block;
     color: #6a6c71;
     font-size: 30px;
+}
+.mid-buttons {
+    display: inline;
+    padding-right: 85px;
+    padding-top: 15px;
 }
 .dropdown {	
     margin-left: 25px;
@@ -349,14 +374,6 @@ border-radius:7.5px;
  vertical-align:center;
  background-color:#98B8FD;
 }
-.right-sidebar {
- background-color:white;
- right:0;
- width:250px;
- height:100%;
- margin-right:5px;
- position:fixed
-}
 
 .card {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
@@ -424,17 +441,17 @@ margin-right:0px;
     clear: both;
 }
 
-
-@media screen and (max-width: 768px) {
+@media screen and  (max-width: 768px) {
 .left-sidebar {
+
     background-color: #749EFF;
     left: 0;
     top: 0;
     width: 100%;
     height: 65px;
     margin-left: 0px;
-    position: fixed;
-    box-shadow: 2px 9px 8px #afafafd1;
+
+    box-shadow: 0px 0px 0px;
 }
 
 .left-sidebar a button {
@@ -486,24 +503,162 @@ li {
     background-color: white;
 }
 .section-2 {
+    margin-left: 0px;
     margin-top: 70px;
+    margin-right: 150x;
+    margin-right: 0px;
     background-color: #F9FAFC;
     height: auto;
 }
-.cardscontent{
-    background-color: red;
-    padding-left: 0px;
+.content > .fa-square-o {
+    display:none;
+    font-size: 10px;
+    color: white;
+    background-color: #749EFF;
+}
+.mid-content b{
+    display:none;
+}
+.mid-buttons {
+    display:inherit;
+    padding-right: 85px;
+    padding-top: 15px;
 }
 body{
     background-color:black;
  }
+
 .card {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 270px;
+    width: 40%;
     margin-left: 8.5%;
     background-color: black;
     margin-top: 7%;
     height: 300px;
+    margin-left: 50px;
+}
+.cardscontent {
+    background-color: red;
+
+}
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+body {
+    width: 100%;
+    margin: 0;
+    height:100%;
+    background-color: black; 
+}
+
+.left-sidebar {
+    display: none;
+    position: inherit;
+    background-color: #749EFF;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    margin-left: 0px;
+    box-shadow: 0px 0px 0px;
+}
+.left-sidebar a button {
+    height: 40px;
+    width: 90px;
+    padding-left: 10px;
+    font-size: 25px;
+    border: none;
+    background-color: #749EFF;
+}
+.top-nav {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: white;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    /* position: sticky; */
+}
+.fa-bars{
+display: block;
+}
+
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#bu {
+    margin-left: 6px;
+    padding-top: 1;
+    height: 20px;
+    background-color: white;
+    border: none;
+  }
+
+input[type=text] {
+    display: none;
+ }
+
+.section-2 {
+    width:100%
+    margin-left: 0px;
+    margin-top: 70px;
+    margin-right: 150x;
+    margin-right: 0px;
+    background-color: #F9FAFC;
+    height: auto;
+}
+.mid-buttons {
+    display: inline;
+    padding-right: 85px;
+    padding-top: 15px;
+}
+.dropdown {
+    margin-left: 15px;
+    font-family: Arial;
+    float: right;
+    height: 50px;
+    padding: 10px;
+    margin-right: 75px;
+    background-color: black;
+    border-radius: 7px;
+    font-size: 17px;
+    box-shadow: 0 1px 1px rgba(50,50,50,0.1);
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+    color: grey;
+}
+
+button.button1 {
+    border-radius: 4px;
+    height: 50px;
+    border: 1px;
+    float: right;
+    background-color: black;
+    color: white;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 17px;
+}
+.card {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 85%;
+    /* margin-left: 8.5%; */
+    background-color: black;
+    /* margin-top: 7%; */
+    height: 300px;
+    /* margin-left: 50px; */
+    padding: 5%;
+    margin: 7%;
+    width: auto;
+    /* padding: 8%; */
 }
 }
