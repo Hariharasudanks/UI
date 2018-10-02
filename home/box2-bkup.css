@@ -1,5 +1,6 @@
 body {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-weight:bold;
     width: 100%;
     margin: 0;
     background-color: #F9FAFC;
@@ -170,9 +171,27 @@ color:white;
     display:inline;
 }
 .content-button > .fa-square-o{
-	font-size:40px;
-	color:white;
-	background-color: #749EFF;
+    
+   border: 1px;
+    border-radius: 7.5px;
+    font-size: 60px;
+    color: white;
+    background-color: #749EFF;
+
+}
+
+.mid-content {
+padding-left: 10px;
+    display: inline-block;
+    color: #6a6c71;
+    font-size: 17px;
+}
+.mid-content b {
+    padding-top: 10px;
+    font-size: 32px;
+}
+.mid-buttons-1{
+    display:inline;
 }
 .fa-list-alt{
 	font-size:30px;
@@ -214,9 +233,10 @@ color:white;
 	font-size:75px;
 }
 .mid-content {
+  padding-left: 10px;
 	display: inline-block;
 	color: #6a6c71;
-    font-size: 30px;
+    font-size: 17px;
 }
 .mid-buttons {
     display: inline;
@@ -510,22 +530,18 @@ li {
     background-color: #F9FAFC;
     height: auto;
 }
-.content > .fa-square-o {
-    
-    font-size: 20px;
-    color: white;
-    background-color: #749EFF;
-
-}
+.content  .fa-square-o {
+    display:none;
+ }
 .mid-content{
-    
+    padding-left: 10px;
     color: #6a6c71;
-    font-size: 30px;
+    font-size: 16px;
     text-align: center;
 }
 
 .mid-content b{
-    margin-left: 150px;
+    margin-left: 30px;
     display:block;
     text-align:center;
 }
@@ -621,7 +637,13 @@ body {
     background-color: white;
     border: none;
   }
+.mid-content{
+   display:none;
 
+}
+.content-button{
+   display:none;
+}
 input[type=text] {
     display: none;
  }
