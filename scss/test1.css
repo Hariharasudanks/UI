@@ -1,0 +1,233 @@
+body {
+  font: 62.5% "Trebuchet MS", Helvetica, sans-serif;
+  color: #ffff;
+  margin: auto; }
+
+ul {
+  list-style: none;
+  -webkit-padding-start: 0px; }
+
+span {
+  color: #1379D3;
+  font-size: 25px;
+  display: inline; }
+
+button {
+  height: 50px;
+  width: 60px;
+  border: none;
+  background-color: #ffff;
+  font-size: 25px;
+  color: darkgrey; }
+
+.button-class {
+  font-size: 20px;
+  padding-left: 0px;
+  color: #1379D3; }
+
+.top-nav {
+  background-color: #1379D3;
+  height: 53px;
+  width: auto; }
+  .top-nav .top-text {
+    color: #ffff;
+    padding-left: 13px;
+    font-size: 20px;
+    padding-top: 17px;
+    display: inline-block; }
+  .top-nav .search {
+    display: inline-block;
+    margin-left: 375px;
+    position: relative;
+    top: -2; }
+  .top-nav .search input {
+    height: 30px;
+    border: none;
+    background: #CADCF4;
+    width: 379px;
+    text-indent: 30px;
+    border-radius: 3px; }
+  .top-nav ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #1379D3;
+    opacity: 1;
+    /* Firefox */ }
+  .top-nav .search .fa-search {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 12px;
+    color: #1379D3;
+    transform: scale(-1, 1); }
+
+.contents {
+  width: 100%;
+  display: inline-flex;
+  height: 100%; }
+  .contents .side-nav {
+    width: 20%;
+    background: #F4F4F4;
+    height: 100%;
+    display: inline-block; }
+    .contents .side-nav a button {
+      height: 50px;
+      width: 60px;
+      padding-left: 10px;
+      font-size: 20px;
+      border: none;
+      background-color: #F4F4F4; }
+    .contents .side-nav .button-class {
+      font-size: 20px;
+      padding-left: 20px;
+      color: darkgrey; }
+    .contents .side-nav span {
+      color: #716262;
+      font-size: 15px;
+      display: inline; }
+  .contents .list-content {
+    width: 60%;
+    background-color: #ffff;
+    height: auto; }
+    .contents .list-content .heading {
+      display: inline-block;
+      padding-top: 10px;
+      padding-left: 20px;
+      color: #1379D3;
+      font-size: 30px; }
+    .contents .list-content .sort {
+      float: right;
+      padding-top: 10px;
+      padding-right: 20px;
+      text-align: right; }
+      .contents .list-content .sort button {
+        height: 50px;
+        width: 40px;
+        border: none;
+        background-color: #ffff;
+        font-size: 25px;
+        color: #1379D3; }
+      .contents .list-content .sort span {
+        color: #1379D3;
+        font-size: 20px;
+        display: inline; }
+    .contents .list-content .list-inner-content {
+      margin: 3%;
+      width: 90%;
+      height: 100%; }
+      .contents .list-content .list-inner-content .add-task {
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 15px;
+        display: block; }
+        .contents .list-content .list-inner-content .add-task button {
+          height: 50px;
+          width: 60px;
+          border: none;
+          background-color: #ffff;
+          font-size: 25px;
+          color: darkgrey; }
+        .contents .list-content .list-inner-content .add-task .button-class {
+          font-size: 20px;
+          padding-left: 0px;
+          color: #1379D3; }
+        .contents .list-content .list-inner-content .add-task span {
+          color: #1379D3;
+          font-size: 25px;
+          display: inline; }
+      .contents .list-content .list-inner-content ul {
+        margin-top: 0px; }
+        .contents .list-content .list-inner-content ul li {
+          height: 25px;
+          padding: 20px 10px;
+          border-bottom: 1px solid lightgrey; }
+          .contents .list-content .list-inner-content ul li button {
+            vertical-align: top;
+            position: relative;
+            bottom: 50%;
+            font-size: 30px;
+            color: darkgrey; }
+          .contents .list-content .list-inner-content ul li .button-class {
+            padding-left: 0px;
+            color: #1379D3; }
+          .contents .list-content .list-inner-content ul li span {
+            font-size: 18px; }
+  .contents .side-content {
+    background-color: #F4F4F4;
+    width: 33%;
+    height: 100%;
+    padding-left: 16px;
+    padding-top: 17px;
+    padding-right: 8px; }
+    .contents .side-content .right-top-content-one {
+      display: inherit;
+      background-color: white;
+      height: auto;
+      width: 97%;
+      border: 1px solid white; }
+      .contents .side-content .right-top-content-one .content {
+        display: inline; }
+        .contents .side-content .right-top-content-one .content button {
+          vertical-align: inherit;
+          position: relative;
+          font-size: 22px;
+          color: darkgrey; }
+        .contents .side-content .right-top-content-one .content .button-class {
+          padding-left: 0px;
+          color: #1379D3; }
+        .contents .side-content .right-top-content-one .content span {
+          color: lightgrey;
+          font-size: 22px;
+          text-decoration: line-through; }
+    .contents .side-content .right-top-content-two {
+      display: inherit;
+      background-color: white;
+      height: auto;
+      width: 97%;
+      border: 1px solid white; }
+      .contents .side-content .right-top-content-two .content {
+        display: inline; }
+        .contents .side-content .right-top-content-two .content button {
+          vertical-align: inherit;
+          position: relative;
+          font-size: 22px;
+          color: darkgrey; }
+        .contents .side-content .right-top-content-two .content .button-class {
+          padding-left: 0px;
+          color: #1379D3; }
+        .contents .side-content .right-top-content-two .content span {
+          font-size: 20px; }
+    .contents .side-content .right-top-content-three {
+      display: inherit;
+      background-color: white;
+      height: 25%;
+      width: 97%;
+      border: 1px solid white; }
+      .contents .side-content .right-top-content-three .content {
+        display: inline; }
+        .contents .side-content .right-top-content-three .content button {
+          vertical-align: inherit;
+          position: relative;
+          font-size: 22px;
+          color: darkgrey; }
+        .contents .side-content .right-top-content-three .content .button-class {
+          padding-left: 0px;
+          color: #1379D3; }
+        .contents .side-content .right-top-content-three .content span {
+          font-size: 20px; }
+    .contents .side-content .right-top-content-four {
+      display: inherit;
+      background-color: white;
+      height: 25%;
+      width: 97%;
+      border: 1px solid white; }
+      .contents .side-content .right-top-content-four .content {
+        display: inline; }
+        .contents .side-content .right-top-content-four .content button {
+          vertical-align: inherit;
+          position: relative;
+          font-size: 22px;
+          color: darkgrey; }
+        .contents .side-content .right-top-content-four .content .button-class {
+          padding-left: 0px;
+          color: #1379D3; }
+        .contents .side-content .right-top-content-four .content span {
+          font-size: 20px; }

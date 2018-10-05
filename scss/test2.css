@@ -1,0 +1,13 @@
+.red {
+  color: blue; }
+
+.red-dark {
+  color: #990000; }
+
+.myclass {
+  color: green;
+  font-size: 0.2em; }
+
+.top-nav {
+  background-color: red;
+  width: auto; }
