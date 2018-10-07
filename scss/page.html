@@ -1,6 +1,7 @@
 <html>
 <head>
    <title> Import example of sass</title>
+
    <link rel="stylesheet" type="text/css" href="test1.css"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -16,32 +17,32 @@
 </nav>
 <div class ="contents">
 <div class="side-nav">
-<ul id="myLinks">
+<ul class="sideLinks">
   <li>
    <a href="#"><button class="fa fa-bars  button-class "></button></a>
 </li>
   <li>
    <a href="#"><button class="fa fa-sun-o button-class "></button></a>
-   <span>My day</span>
+   <span class="innerspan">My day</span>
 </li>
     <li>
-     <a href="#"><button class="fa fa-star-o button-class" aria-hidden="true"></button></a>
-     <span>Important</span>
+     <a href="#"><button id="star" class="fa fa-star-o button-class" aria-hidden="true"></button></a>
+     <span class="innerspan">Important</span>
   </li>
 
   <li>
     <a  href="#"><button class="fa fa-calendar  button-class"></button></a>
-       <span>Planned</span>
+       <span class="innerspan">Planned</span>
 </li>
 	<li><a href="#"><button class="fa fa-home button-class"></button></a>
-    <span>Tasks</span>
+    <span class="innerspan">Tasks</span>
 
 </li>
-	<li><a href="#"><button class="fa fa-list-ul button-class"></button></a>
-  <span>My List</span>
+	<li><a href="#"><button class="fa fa-list-ul button-class selected"></button></a>
+  <span class="innerspan">My List</span>
 	</li>
 <li><a href="#"><button class="fa fa-plus button-class"></button></a>
-  <span>New List</span>
+  <span class="innerspan">New List</span>
 
     </li>
 
@@ -58,49 +59,83 @@
   <span>Sort</span>
 </div>
 <div class="list-inner-content">
-  <div class="add-task">
-  <button class="fa fa-plus button-class"></button>
- <span>Add a Task</span>
-</div>
-  <ul>
-    <li>
+
+  <ul class="ul">
+    <li class="item">
     <button class="fa fa-circle-thin button class"></button>
-    <span>Lorem ipsum is the dummy text of the printing and typesetting industry</span>
+    <span class ="span">Lorem ipsum is the dummy text of the printing and typesetting industry</span>
+    <button class="fa fa-star-o right-float" aria-hidden="true"></button>
     </li>
-    <li></li>
-    <li></li>
-    <li></li>
   </ul>
+  <div class="add-task">
+  <button class="fa fa-plus click-plus button-class"></button>
+  <input class="input-text" placeholder="Add a task"/>
+</div>
 </div>
 </div>
 <div class="side-content">
   <div class="right-top-content-one">
     <div class="content">
     <button class="fa fa-circle-thin button class"></button>
-    <button class="fa fa-star-o button-class" aria-hidden="true"></button>
-      <span>Lorem ipsum is the dummy text of the printing and typesetting industry</span>
+  <span class="content-span">Lorem ipsum is the dummy text of the printing and typesetting industry</span>
+  <button class="fa fa-star-o right-float" aria-hidden="true"></button>
+
     </div>
   </div>
   <br>
   <div class="right-top-content-two">
-    <div class="content">
+    <div class="content-2">
     <button class="fa fa-sun-o button-class "></button>
     <span>Add to my day</span>
   </div>
 </div>
 <br>
 <div class="right-top-content-three">
-  <div class="content">
-  <button class="fa fa-sun-o button-class "></button>
-  <span>Add to my day</span></div>
+  <div class="content-3">
+    <div class="inner-div-1">
+  <button class="fa fa-clock-o button-class "></button>
+</div>
+    <div class="inner-div-2">
+  <span>Remind Me</span>
 </div>
 <br>
-<div class="right-top-content-four">
-  <div class="content">
-  <button class="fa fa-sun-o button-class "></button>
-  <span>Add to my day</span></div>
+<div class="inner-div-1">
+<button class="fa fa-calendar button-class "></button>
+</div>
+<div class="inner-div-2">
+<span>Add Due Date</span>
+</div>
+<br>
+<div class="inner-div-1">
+<button class="fa fa-repeat button-class "></button>
+</div>
+<div class="inner-div-2">
+<span>Repeat</span>
 </div>
 
 </div>
+</div>
+<br>
+<div class="right-top-content-four">
+  <div class="content-4">
+  <span>Add Note...</span></div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br>
+<div class="bottom-right">
+  <div class="left-bottom-content-one">
+    <div class="content">
+    <button class="fa fa-chevron-right button class"></button>
+  <span>Completed Today</span>
+  <button class="fa fa-trash-o right-float" aria-hidden="true"></button>
+
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<script src="script.js"></script>
+
 </body>
 </html>

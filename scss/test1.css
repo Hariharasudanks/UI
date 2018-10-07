@@ -7,6 +7,12 @@ ul {
   list-style: none;
   -webkit-padding-start: 0px; }
 
+.selected {
+  background-color: #EDEDED; }
+
+.right-float {
+  float: right; }
+
 span {
   color: #1379D3;
   font-size: 25px;
@@ -68,7 +74,10 @@ button {
     width: 20%;
     background: #F4F4F4;
     height: 100%;
-    display: inline-block; }
+    display: inline-block;
+    -webkit-transition: width 0.5s;
+    /* For Safari 3.1 to 6.0 */
+    transition: width 0.35s; }
     .contents .side-nav a button {
       height: 50px;
       width: 60px;
@@ -80,12 +89,12 @@ button {
       font-size: 20px;
       padding-left: 20px;
       color: darkgrey; }
-    .contents .side-nav span {
+    .contents .side-nav .innerspan {
       color: #716262;
       font-size: 15px;
       display: inline; }
   .contents .list-content {
-    width: 60%;
+    width: 97%;
     background-color: #ffff;
     height: auto; }
     .contents .list-content .heading {
@@ -112,7 +121,7 @@ button {
         display: inline; }
     .contents .list-content .list-inner-content {
       margin: 3%;
-      width: 90%;
+      width: 96%;
       height: 100%; }
       .contents .list-content .list-inner-content .add-task {
         border-bottom: 1px solid lightgrey;
@@ -129,10 +138,13 @@ button {
           font-size: 20px;
           padding-left: 0px;
           color: #1379D3; }
-        .contents .list-content .list-inner-content .add-task span {
-          color: #1379D3;
-          font-size: 25px;
-          display: inline; }
+        .contents .list-content .list-inner-content .add-task input {
+          font-size: 16px;
+          display: inline;
+          border: none;
+          width: 85%; }
+        .contents .list-content .list-inner-content .add-task ::placeholder {
+          color: #1379D3; }
       .contents .list-content .list-inner-content ul {
         margin-top: 0px; }
         .contents .list-content .list-inner-content ul li {
@@ -150,13 +162,20 @@ button {
             color: #1379D3; }
           .contents .list-content .list-inner-content ul li span {
             font-size: 18px; }
+        .contents .list-content .list-inner-content ul .item:hover {
+          background-color: lightgrey;
+          color: white; }
   .contents .side-content {
+    display: none;
     background-color: #F4F4F4;
     width: 33%;
     height: 100%;
     padding-left: 16px;
     padding-top: 17px;
-    padding-right: 8px; }
+    padding-right: 8px;
+    -webkit-transition: width 0.5s;
+    /* For Safari 3.1 to 6.0 */
+    transition: width 0.35s; }
     .contents .side-content .right-top-content-one {
       display: inherit;
       background-color: white;
@@ -164,7 +183,9 @@ button {
       width: 97%;
       border: 1px solid white; }
       .contents .side-content .right-top-content-one .content {
-        display: inline; }
+        display: inline-flex; }
+        .contents .side-content .right-top-content-one .content .fa-star-o {
+          float: right; }
         .contents .side-content .right-top-content-one .content button {
           vertical-align: inherit;
           position: relative;
@@ -174,6 +195,7 @@ button {
           padding-left: 0px;
           color: #1379D3; }
         .contents .side-content .right-top-content-one .content span {
+          padding: 5%;
           color: lightgrey;
           font-size: 22px;
           text-decoration: line-through; }
@@ -183,51 +205,83 @@ button {
       height: auto;
       width: 97%;
       border: 1px solid white; }
-      .contents .side-content .right-top-content-two .content {
+      .contents .side-content .right-top-content-two .content-2 {
         display: inline; }
-        .contents .side-content .right-top-content-two .content button {
+        .contents .side-content .right-top-content-two .content-2 .button-class {
           vertical-align: inherit;
           position: relative;
           font-size: 22px;
-          color: darkgrey; }
-        .contents .side-content .right-top-content-two .content .button-class {
+          color: darkgrey;
           padding-left: 0px;
-          color: #1379D3; }
-        .contents .side-content .right-top-content-two .content span {
-          font-size: 20px; }
+          color: darkgrey; }
+        .contents .side-content .right-top-content-two .content-2 span {
+          color: lightgrey;
+          font-size: 22px; }
     .contents .side-content .right-top-content-three {
       display: inherit;
       background-color: white;
-      height: 25%;
+      height: auto;
       width: 97%;
       border: 1px solid white; }
-      .contents .side-content .right-top-content-three .content {
-        display: inline; }
-        .contents .side-content .right-top-content-three .content button {
-          vertical-align: inherit;
-          position: relative;
-          font-size: 22px;
-          color: darkgrey; }
-        .contents .side-content .right-top-content-three .content .button-class {
-          padding-left: 0px;
-          color: #1379D3; }
-        .contents .side-content .right-top-content-three .content span {
-          font-size: 20px; }
+      .contents .side-content .right-top-content-three .content-3 {
+        display: -webkit-inline-box; }
+        .contents .side-content .right-top-content-three .content-3 .inner-div-1 {
+          display: inline; }
+          .contents .side-content .right-top-content-three .content-3 .inner-div-1 .button-class {
+            vertical-align: inherit;
+            position: relative;
+            font-size: 22px;
+            color: darkgrey;
+            padding-left: 0px;
+            color: darkgrey; }
+        .contents .side-content .right-top-content-three .content-3 .inner-div-2 {
+          display: inline-flex;
+          border-bottom: 1px solid lightgrey; }
+          .contents .side-content .right-top-content-three .content-3 .inner-div-2 span {
+            color: lightgrey;
+            font-size: 22px; }
     .contents .side-content .right-top-content-four {
       display: inherit;
       background-color: white;
-      height: 25%;
+      height: 67px;
       width: 97%;
-      border: 1px solid white; }
-      .contents .side-content .right-top-content-four .content {
+      border: 1px solid white;
+      /* padding: 2px; */ }
+      .contents .side-content .right-top-content-four .content-4 {
         display: inline; }
-        .contents .side-content .right-top-content-four .content button {
-          vertical-align: inherit;
-          position: relative;
-          font-size: 22px;
-          color: darkgrey; }
-        .contents .side-content .right-top-content-four .content .button-class {
-          padding-left: 0px;
-          color: #1379D3; }
-        .contents .side-content .right-top-content-four .content span {
-          font-size: 20px; }
+        .contents .side-content .right-top-content-four .content-4 span {
+          padding-top: 12%;
+          padding: 10%;
+          color: darkgray;
+          font-size: 22px; }
+  .contents .bottom-right {
+    display: inherit;
+    background-color: grey;
+    height: 67px;
+    width: 97%;
+    border: 1px solid white;
+    /*right: 11px;
+position: absolute;
+bottom: 0;
+display: inline-flex;
+background-color: grey;
+height: auto;
+width: 29%;
+border: 1px solid white;*/ }
+    .contents .bottom-right .left-bottom-content-one .content {
+      display: inline-flex; }
+      .contents .bottom-right .left-bottom-content-one .content .fa-star-o {
+        float: right; }
+      .contents .bottom-right .left-bottom-content-one .content button {
+        vertical-align: inherit;
+        position: relative;
+        font-size: 22px;
+        color: black;
+        background: gray; }
+      .contents .bottom-right .left-bottom-content-one .content .button-class {
+        padding-left: 0px;
+        color: #1379D3; }
+      .contents .bottom-right .left-bottom-content-one .content span {
+        padding: 5%;
+        color: lightgrey;
+        font-size: 22px; }
