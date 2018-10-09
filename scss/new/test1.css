@@ -3,6 +3,11 @@ body {
   color: #ffff;
   margin: auto; }
 
+.hidden-innerspan {
+  color: #716262;
+  font-size: 15px;
+  display: none; }
+
 ul {
   list-style: none;
   -webkit-padding-start: 0px; }
@@ -88,6 +93,11 @@ button {
       font-size: 20px;
       border: none;
       background-color: #F4F4F4; }
+    .contents .side-nav .new {
+      border: none;
+      width: auto; }
+    .contents .side-nav .myList {
+      background-color: #1379D3; }
     .contents .side-nav .button-class {
       font-size: 20px;
       padding-left: 20px;
@@ -96,6 +106,12 @@ button {
       color: #716262;
       font-size: 15px;
       display: inline; }
+    .contents .side-nav .innerspan-input {
+      border: none;
+      color: lightgrey;
+      font-size: 15px;
+      display: inline;
+      width: 145px; }
   .contents .list-content {
     width: 97%;
     background-color: #ffff;
