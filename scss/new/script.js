@@ -1,38 +1,17 @@
 var doc = document;
-/*var one = {id: 1,
-  isImportant: false,
-  isChecked: false,
-  content: "hioiiiiiiii"
-}*
-var three = {
-  id: 3,
-  isImportant: false,
-  isChecked: false,
-  content: "popadaspdpas"
-}*/
-/*var toDo = [one
-  , {
-    id: 2,
-    isImportant: false,
-    isChecked: false,
-    content: "sufsdoifusdiufsdusofid"
-  }, three,
-  {
-    id: 4,
-    isImportant: false,
-    isChecked: false,
-    content: "harrish"
-  }
-
-];*/
+var listId = 0;
+var taskId = 0;
 var toDo = {
+  id:null,
   name:"Untitled",
   isImportant: false,
   isChecked: false
 }
 var myList = {
+  id: null,
   name: null,
   numberofTasks:null,
+  active:false,
   listOfTodo: []
 };
 var allList = [];
@@ -40,7 +19,7 @@ var allList = [];
 function findTargetListIndex(event) {
   var target;
   if (event.target.classList.contains("list-item")) {
-        target = event.target;
+    target = event.target;
   } else {
     target = event.target.parentNode;
   }
@@ -57,14 +36,17 @@ function getElementsByClass(className) {
 function ToDo(Myname){
   var obj = Object.create(toDo);
   obj.name = Myname;
+  obj.id = ++taskId;
   return obj;
 }
 
 function List(name, numberofTasks){
   var obj = Object.create(myList);
+  obj.id = ++listId;
   obj.name = name;
   obj.numberofTasks = numberofTasks;
   obj.listOfTodo = [];
+  obj.active = false;
   return obj;
 
 }
@@ -76,77 +58,100 @@ function createHTMLElement(elementName, className) {
 }
 
 function init() {
-  var items = document.getElementsByClassName('span');
+  /*var items = getElementsByClass('span');
   for (var i = 0; i < items.length; i++) {
-    items[i].addEventListener('click', toggleRightSideBar);
+  items[i].addEventListener('click', toggleRightSideBar);
 
-  }
+}*/
 
-  //  var myList = getElementsByClass('mylist');
-  //  myList.addEventListener('click',showList);
-  var lists = document.getElementsByClassName('list-item');
-  for (var i = 0; i < lists.length; i++) {
-    lists[i].addEventListener('click', findTargetListIndex);
+var lists = getElementsByClass('list-item');
+for (var i = 0; i < lists.length; i++) {
+  lists[i].addEventListener('click', findTargetListIndex);
 
-  }
-
-  var button = getElementsByClass('fa-bars');
-  button.addEventListener('click', toggleLeftSideBar);
-
-  var back = getElementsByClass("fa-chevron-right");
-  back.addEventListener('click', closeRightSlider);
-
-  var addList = getElementsByClass('innerspan-input side-button');
-  addList.addEventListener("keydown",function e(e) {
-    if (e.keyCode == 13) {
-      createList();
-    }
-  });
-  /*function e(e) {
-  if (e.keyCode == 13) {
-  createList();
 }
-}););*/
+
+var button = getElementsByClass('fa-bars');
+button.addEventListener('click', toggleLeftSideBar);
+
+var back = getElementsByClass("fa-chevron-right");
+back.addEventListener('click', closeRightSlider);
+
+var addList = getElementsByClass('innerspan-input side-button');
+addList.addEventListener("keydown",function e(e) {
+  if (e.keyCode == 13) {
+    createList();
+  }
+});
+
+var addlistDiv = doc.getElementsByClassName("add-task");
+for( i = 0;i< addlistDiv.length;i++){
+  addlistDiv[i].addEventListener('click', add);
+}
 
 var deleteButton = getElementsByClass('delete');
-deleteButton.addEventListener("click", deleteList);
+deleteButton.addEventListener("click", deleteTask);
 }
 
 init();
+function showListTasks(listObj){
+  console.log("List Obj: "+listObj);
+  var mainList = getElementsByClass("ul");
+  while (mainList.childNodes.length > 1) {
+    mainList.removeChild(mainList.firstChild);
+  }
+  for(var i = 0; i < listObj.listOfTodo.length ;i++){
+    var j = i+1;
+    var task = listObj.listOfTodo[i];
+    console.log("Task is: "+task);
+    newList = createHTMLElement("li", "item");
+    newList.setAttribute("id","task"+task.id);
+    leftButton = createHTMLElement("button", "fa fa-circle-thin listButton1");
+    content = createHTMLElement('span', 'span');
+    newText = document.createTextNode(task.name);
+    content.appendChild(newText);
+    rightButton = createHTMLElement('button', 'fa fa-star-2  listButtonright-float');
+    newList.appendChild(leftButton);
+    newList.appendChild(content);
+    newList.appendChild(rightButton);
+    mainList.insertBefore(newList, mainList.lastChild);
+    document.getElementsByClassName("add-class")[0].style.display = "none";
+    newList.addEventListener('click', toggleRightSideBar, false);
+    leftButton.addEventListener('click', enableClick, false);
+    addInput.placeholder = "Add a Task";
+    addInput.value = "";
+    addButton.classList.toggle("fa-circle-thin");
+    // var items = doc.getElementsByClassName("span");
+
+    //for (var j = 0; j < items.length; j++) {
+    //items[j].addEventListener('click', toggleRightSideBar, false);
+    //}
+  }
+
+}
+
 function showLists(e){
-  //alert(findTargetListIndex(e));
- //alert("showList fn..Index: "+e);
+  allList.forEach(task => {
+    task.active = false;
+
+  });
+  //  alert(findTargetListIndex(e));
+  //alert("showList fn..Index: "+e);
   var listObj = allList[e];
   //alert("List Name: "+list.name);
+  console.log("List Obj"+listObj);
   var list = getElementsByClass("ul");
+  listObj.active = true;
   getElementsByClass("heading").innerHTML = listObj.name;
+
+  showListTasks(listObj);
 
   console.log("E is: "+ e);
   console.log("ListObj: "+ allList[e]);
 
- /*if(listObj.listOfTodo.length > 0) {
-  listObj.listOfTodo.forEach(task => {
-    newList = createHTMLElement("li", "item");
-    leftButton = createHTMLElement("button", "fa fa-circle-thin");
-    content = createHTMLElement('span', 'span');
-    newText = document.createTextNode(task.content);
-    content.appendChild(newText);
-    rightButton = createHTMLElement('button', 'fa fa-star-o right-float');
-    newList.appendChild(leftButton);
-    newList.appendChild(content);
-    newList.appendChild(rightButton);
-    list.insertBefore(newList, list.lastChild);
-    document.getElementsByClassName("add-class")[0].style.display = "none";
-    addInput.placeholder = "Add a Task";
-    addInput.value = "";
-    addButton.classList.toggle("fa-circle-thin");});
-
-}*/
-  //console.log(findTargetListIndex(e));
 
 }
 function createElement(element) {
-  var elementObj = doc.createElement(element.name);
+  var elementObj = document.createElement(element.name);
   if (element.attribute) {
     if (element.attribute.class) {
       elementObj.className = element.attribute.class;
@@ -157,6 +162,10 @@ function createElement(element) {
     if (element.attribute.id) {
       elementObj.id = element.attribute.id;
     }
+  }
+  elementObj.addEventListener(element.attribute.eventAction, element.attribute.eventSuccessFunction, element.attribute.useCapture);
+  if (element.attribute.parentElement != undefined) {
+    element.attribute.parentElement.appendChild(element);
   }
   if (element.style) {
     if (element.style.cursor) {
@@ -174,12 +183,17 @@ function createList(e){
   }
   else{
     // alert(input.value);
-    allList.push(List(input.value,2,));
+    var listObj = List(input.value,2);
+    allList.push(listObj);
     console.log(allList);
     //   list.removeChild(list.lastChild);
     //({name:"button",attribute: {class:"fa fa-circle-thin"}});
+
+
+    //  var li1 = createElement({name:"li",attribute:{class:"list-item",id:"list"+listObj.id,})
     var li1 = document.createElement("li");
     li1.classList.add("list-item");
+    li1.setAttribute("id","list"+listObj.id);
     li1.addEventListener("click",findTargetListIndex);
     ul.insertBefore(li1, ul.lastChild.previousSibling);
     li1.innerHTML = "<a href='#'><button class='fa fa-list-ul button-class'></button></a><span class='innerspan mylist-innerspan'>"+input.value+"</span>";
@@ -193,17 +207,43 @@ function createList(e){
 
 }
 
+/*function toggleRightSideBar(e) {
+e.target.className = "active";
+var sideContent = getElementsByClass("side-content");
+var listContent = getElementsByClass("list-content");
+var contentSpan = getElementsByClass("content-span");
+contentSpan.innerHTML = e.target.innerText;
+console.log(e);
+sideContent.style.display = "block";
+listContent.style.width = "97%";
+}*/
+function getListbyId(listId){
+  return allList[listId-1];
+}
+
 function toggleRightSideBar(e) {
-  e.target.className = "active";
+  var listId = findActivelist().id;
+  var taskId = e.target.parentNode.id;
+  //  console.log(taskId);
+  var list = getListbyId(listId);
+  //  console.log("list is: "+list);
+  for(var i = 0; i < list.listOfTodo.length; i++ ){
+    if(taskId == "task"+list.listOfTodo[i].id )
+    task = list.listOfTodo[i];
+    //   alert("Task found");
+  }
+
   var sideContent = getElementsByClass("side-content");
   var listContent = getElementsByClass("list-content");
   var contentSpan = getElementsByClass("content-span");
-  contentSpan.innerHTML = e.target.innerText;
+  getElementsByClass("side-content").id = taskId;
+  //contentSpan.innerHTML = task.name;
   console.log(e);
   sideContent.style.display = "block";
   listContent.style.width = "97%";
+  getElementsByClass('right-top-content-one').innerHTML="<div class = 'content'><button class='fa fa-circle-o task-select' aria-hidden='true'></button><span class='content-span'>"+task.name +"</span><button class='fa fa-star-o float-r pointer task-important' aria-hidden='true'></button></div>";
+  //alert("ListID: "+listId+" TaskId: "+taskId);
 
-  //console.log("Clicked " + this.id);
 }
 
 
@@ -237,36 +277,46 @@ function toggleLeftSideBar(e) {
   }
 }
 
-function findCurrentlist() {
-var currentList;
-allList.forEach(list => {
-if (list.active) {
-currentList = list;
+function findActivelist() {
+  var currentList;
+  allList.forEach(list => {
+    if (list.active) {
+      currentList = list;
+    }
+  });
+  return currentList;
 }
-});
-return currentList;
-}
+
+
 
 
 var addButton = document.getElementsByClassName('click-plus')[0];
 var addInput = document.getElementsByClassName("input-text")[0];
 var hiddenButton = document.getElementsByClassName("add-class")[0];
 var rightAdd = function() {
+  //console.log("ADD DIV"+addlistDiv);
   if (addInput.value.trim() === '' || addInput.value === "Add a Task") {
     document.getElementsByClassName("input-text")[0].focus();
   } else {
     var list = getElementsByClass("ul");
-    newList = createElement({name: 'li', attribute: { class: 'item'}});
     //  newList = createHTMLElement("li", "item");
 
-    leftButton = createElement({name:"button",attribute: {class:"fa fa-circle-thin"}});
-    content = createElement({name:'span',attribute:{class: 'span'}});
+
     console.log("input"+addInput.value);
     var listObj = new ToDo(addInput.value);
-    console.log(listObj);
+    newList = createElement({name: 'li', attribute: { class: 'item',id:"task"+listObj.id}});
+    //  elementObj.addEventListener(element.attribute.eventAction, element.attribute.eventSuccessFunction, element.attribute.useCapture);
+
+    leftButton = createElement({name:"button",attribute: {class:"fa fa-circle-thin listButton1",eventAction:'click',eventSuccessFunction:enableClick,useCapture:"false"}});
+    content = createElement({name:'span',attribute:{class: 'span'}});
+    //  console.log(listObj);
     newText = document.createTextNode(listObj.name);
+    activeList = findActivelist();
+    //activeList = findActivelistById();
+    activeList.listOfTodo.push(listObj);
+    console.log("ACTIVE LIST: "+activeList);
     content.appendChild(newText);
-    rightButton = createHTMLElement('button', 'fa fa-star-o right-float');
+    rightButton = createHTMLElement('button', 'fa fa-star-o listButton2 right-float');
     newList.appendChild(leftButton);
     newList.appendChild(content);
     newList.appendChild(rightButton);
@@ -274,12 +324,17 @@ var rightAdd = function() {
     document.getElementsByClassName("add-class")[0].style.display = "none";
     addInput.placeholder = "Add a Task";
     addInput.value = "";
-    addButton.classList.toggle("fa-circle-thin");
-    var items = document.getElementsByClassName("span");
+    //  addButton.classList.toggle("fa-circle-thin");
+    //getElementsByClass("item",toggleRightSideBar,false);
+    newList.addEventListener('click', toggleRightSideBar, false);
+
+
+    /*    items =  getElementsByClass("item");
     for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener('click', toggleRightSideBar, false);
-    }
-  }
+    items[i].addEventListener('click', toggleRightSideBar, false);
+  }*/
+}
+
 };
 
 hiddenButton.addEventListener('click', rightAdd, false);
@@ -290,9 +345,6 @@ function add(e) {
     document.getElementsByClassName("input-text")[0].focus();
     document.getElementsByClassName("add-class")[0].style.display = "block";
   } else {
-    //addNewList(addInput.value);
-    //addInput.value="";
-    // addButton.classList.toggle("fa-circle-thin");
 
     var items = document.getElementsByClassName("item");
     for (var i = 0; i < items.length; i++) {
@@ -308,11 +360,11 @@ function showList(evt){
   for(var i = 0;i < toDo.length;i++){
 
     newList = createHTMLElement("li", "item");
-    leftButton = createHTMLElement("button", "fa fa-circle-thin");
+    leftButton = createHTMLElement("button", "fa fa-circle-thin listButton1");
     content = createHTMLElement('span', 'span');
     newText = document.createTextNode(toDo[i]["list"]);
     content.appendChild(newText);
-    rightButton = createHTMLElement('button', 'fa fa-star-o right-float');
+    rightButton = createHTMLElement('button', 'fa fa-star-o listButton2 right-float');
     newList.appendChild(leftButton);
     newList.appendChild(content);
     newList.appendChild(rightButton);
@@ -328,17 +380,71 @@ function showList(evt){
   }
 }
 
-
-
-var deleteList = function() {
-  //alert(document.getElementsByClassName('active')[0].innerHTML);
-
-  var element = document.getElementsByClassName('active')[0];
-  var ul = document.getElementsByClassName("ul")[0];
-  var parent = document.getElementsByClassName('active')[0].parentNode;
-  ul.removeChild(parent);
-  //element.ClassName = "span";
+function deleteTask(e) {
+  var content = getElementsByClass("side-content").id;
+  console.log("Content ID: "+content);
+  var listId = findActivelist().id;
+  console.log("ListID: "+listId);
+  var task;
+  for(var i = 0; i < allList[listId-1].listOfTodo.length; i++) {
+    console.log("delete ID:   "+"task"+allList[listId-1].listOfTodo[i].id);
+    if(content == "task"+allList[listId-1].listOfTodo[i].id){
+      alert("delete ID: "+allList[listId-1].listOfTodo[i].id);
+      console.log("delete ID: "+allList[listId-1].listOfTodo[i].id);
+      allList[listId-1].listOfTodo.splice(i,1);
+      task = allList[listId-1];
+      //alert("ID found");
+    }
+  }
+  showListTasks(task);
   closeRightSlider();
+}
+
+function enableClick(e){
+  //alert("butto-clicked");
+  //    var list = getListById(getElementsByClassName("new-tasks").id);
+  var content = getElementsByClass("side-content").id;
+  console.log("Content: "+content);
+  var listId = findActivelist().id;
+  console.log("ListID: "+listId);
+  var task;
+  for(var i = 0; i < allList[listId-1].listOfTodo.length; i++) {
+    if(content == "task"+allList[listId-1].listOfTodo[i].id){
+      alert("ID: "+allList[listId-1].listOfTodo[i].id);
+      task = allList[listId-1];
+    }
+}
+console.log("Task is: "+task);
+  //var task = getTaskById(e.currentTarget.parentElement.id,list);
+  var taskSelect = getElementsByClass('task-select');
+  //var  = getElementsByClassName('select-icon');
+  //console.log(taskSelect.className);
+  //console.log(e.currentTarget.className);
+  if(e.currentTarget.classList.contains("fa-circle-thin")) {
+  //  task.isChecked = true;
+    e.currentTarget.classList.replace("fa-circle-thin","fa-check-circle");
+   taskSelect.classList.replace("fa-circle-o","fa-check-circle");
+    console.log(taskSelect);
+    console.log("11111");
+  } else {
+  //  task.isChecked = false;
+    e.currentTarget.classList.replace("fa-check-circle","fa-circle-thin");
+    taskSelect.classList.replace("fa-check-circle","fa-circle-o");
+    console.log('2222');
+  }
+ e.stopPropagation();
+}
 
 
-};
+/*var deleteTask = function() {
+//alert(document.getElementsByClassName('active')[0].innerHTML);
+
+var element = document.getElementsByClassName('active')[0];
+var ul = document.getElementsByClassName("ul")[0];
+var parent = document.getElementsByClassName('active')[0].parentNode;
+ul.removeChild(parent);
+//element.ClassName = "span";
+closeRightSlider();
+
+
+};*/
