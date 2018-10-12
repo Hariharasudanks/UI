@@ -1,14 +1,14 @@
 var doc = document;
-var listId = 0;
-var taskId = 0;
-var toDo = {
-  id: null,
-  name: "Untitled",
-  isImportant: false,
-  isChecked: false,
-  note: null,
-  dueDate: null,
-  addtoDay: false
+var listId:number = 0;
+var taskId :number= 0;
+class toDo  {
+  id: number;
+  name :String ;
+  isImportant: Boolean;
+  isChecked: Boolean;
+  note: Boolean;
+  dueDate: Boolean;
+  addtoDay: Boolean;
 }
 
 var myList = {
@@ -31,7 +31,7 @@ function findTargetListIndex(event) {
     target = event.target.parentNode;
   }
   console.log(target);
-  currentIndex = [].indexOf.call(doc.getElementsByClassName("list-item"), target);
+  var currentIndex = [].indexOf.call(doc.getElementsByClassName("list-item"), target);
   console.log("Current Index: " + currentIndex);
   showLists(currentIndex);
 }
