@@ -321,6 +321,8 @@ border-bottom: 1px solid lightgrey;
     width: 97%;
     border: 1px solid white;
     .content{
+      overflow:auto;
+      resize:none;
     display: inline-flex;
     .fa-star-o{
       margin-left: 69px;
@@ -408,12 +410,12 @@ border-bottom: 1px solid lightgrey;
       display: none;
       border: none;
       }
-      .dateoneOne-toggle{
+     /* .dateoneOne-toggle{
         padding-left: 30px;
         outline: none;
         display: block;
         border: none;
-        }
+        }*/
       .datetwoTwo{
         padding-left: 30px;
         outline: none;

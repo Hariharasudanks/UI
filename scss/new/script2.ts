@@ -1,26 +1,79 @@
-var doc = document;
+const doc:Document = document;
+const clickEvent : string = 'click';
 var listId:number = 0;
 var taskId :number= 0;
-class toDo  {
+
+var allList: myList[] = [];
+
+class myList  {
   id: number;
-  name :String ;
-  isImportant: Boolean;
-  isChecked: Boolean;
-  note: Boolean;
-  dueDate: Boolean;
-  addtoDay: Boolean;
+  name: string;
+  numberofTasks: number;
+  active: boolean;
+  listOfTodo: toDo[];
+  constructor(id,name,numberofTasks,active,listOfTodo){
+    this.id = id;
+    this.name = name;
+    this.numberofTasks = numberofTasks;
+    this.active = active;
+    this.listOfTodo = listOfTodo;
+  }
+
+  /*public setId(id:number){
+    this.id = id;
+  }
+  public getId():number{
+    return this.id;
+  }
+  public getName(){
+    return this.name;
+  }
+  public setName(name:string){
+    this.name = name;
+  }
+  public setNumberOfTasks(numberofTasks:number){
+    this.numberofTasks = numberofTasks;
+  }
+  public getNumberOfTasks():number{
+     return this.numberofTasks;
+  }
+
+  public setListOfTodo(listOfTodo:toDo[]){
+    this.listOfTodo = listOfTodo;
+
+  }
+  public getListOfTodo():toDo[]{
+    return this.listOfTodo
+  }*/
 }
 
-var myList = {
-  id: null,
-  name: null,
-  numberofTasks: null,
-  active: false,
-  listOfTodo: []
-};
-var allList = [];
+class toDo  {
+  id: number;
+  name :string ;
+  isImportant: boolean;
+  isChecked: boolean;
+  note: string;
+  dueDate: string;
+  addtoDay: boolean;
+  reminder: string;
+  constructor(id,name,isImportant,isChecked,note,dueDate,addtoDay,reminder){
+    this.id = id;
+    this.name = name;
+    this.isImportant = isImportant;
+    this.isChecked = isChecked;
+    this.note = note;
+    this.dueDate = dueDate;
+    this.addtoDay = addtoDay;
+    this.reminder = this.reminder;
+  }
 
-function findTargetListIndex(event) {
+}
+
+
+
+
+
+function findTargetListIndex(event):void {
   console.log(event.target);
   var target;
 
@@ -36,7 +89,7 @@ function findTargetListIndex(event) {
   showLists(currentIndex);
 }
 
-function getElementsByClass(className) {
+function getElementsByClass(className:string){
   return doc.getElementsByClassName(className)[0];
 }
 
@@ -66,7 +119,7 @@ function createElement(element) {
 }
 
 
-function ToDo(Myname) {
+/*function ToDo(Myname):toDo {
   var obj = Object.create(toDo);
   obj.name = Myname;
   obj.id = ++taskId;
@@ -78,8 +131,8 @@ function ToDo(Myname) {
   return obj;
 }
 
-function List(name, numberofTasks) {
-  var obj = Object.create(myList);
+function List(name, numberofTasks):myList {
+  var obj:myList = Object.create(myList);
   obj.id = ++listId;
   obj.name = name;
   obj.numberofTasks = numberofTasks;
@@ -88,6 +141,9 @@ function List(name, numberofTasks) {
   return obj;
 
 }
+
+*/
+
 function createHTMLElement(elementName, className) {
 
   var htmlElement = document.createElement(elementName);
@@ -102,7 +158,7 @@ function init() {
   var datetwoTwo = getElementsByClass("datetwoTwo");
   datetwoTwo.addEventListener("focusout", addDateTwo);
   var inputTask = getElementsByClass("input-text");
-  inputTask.addEventListener("keydown", function e(e) {
+  inputTask.addEventListener("keydown", function e(e: KeyboardEvent) {
     if (e.keyCode === 13) {
       addTask();
     }
@@ -112,23 +168,23 @@ function init() {
   note.addEventListener("focusout", addNote);
 
   inputTask.addEventListener("input", showButton);
-  var lists = getElementsByClass('list-item');
-  for (let i = 0; i < lists.length; i++) {
-    lists[i].addEventListener('click', findTargetListIndex);
-  }
+  var lists=getElementsByClass('list-item');
+  
+    lists.addEventListener(clickEvent, findTargetListIndex);
+  
 
   var button = getElementsByClass('fa-bars');
-  button.addEventListener('click', toggleLeftSideBar);
+  button.addEventListener(clickEvent, toggleLeftSideBar);
 
   var back = getElementsByClass("fa-chevron-right");
-  back.addEventListener('click', closeRightSlider);
+  back.addEventListener(clickEvent, closeRightSlider);
 
 
 
   var addList = getElementsByClass('innerspan-input side-button');
-  addList.addEventListener("keydown", function e(e) {
+  addList.addEventListener("keydown", function e(e:KeyboardEvent) {
     if (e.keyCode === 13) {
-      createList();
+      createList(e);
     }
   });
 
@@ -137,73 +193,102 @@ function init() {
      addlistDiv[i].addEventListener('click', add);
    }*/
   var reminder = getElementsByClass('dateTwo');
-  reminder.addEventListener('click', enterReminder);
+  reminder.addEventListener(clickEvent, enterReminder);
 
   var dueDate = getElementsByClass('dateOne');
-  dueDate.addEventListener('click', enterDate);
+  dueDate.addEventListener(clickEvent, enterDate);
 
   var deleteButton = getElementsByClass('delete');
-  deleteButton.addEventListener("click", deleteTask);
+  deleteButton.addEventListener(clickEvent, deleteTask);
 
   var addDay = getElementsByClass("right-top-content-two");
-  addDay.addEventListener("click", addMyDay);
+  addDay.addEventListener(clickEvent, addMyDay);
 }
 
 init();
 function getListbyId(listId) {
   return allList[listId - 1];
 }
-function getTaskById(taskId) {
+/*function getTaskById(taskId:number) {
   for (let i = 0; i < list.listOfTodo.length; i++) {
     if (taskId === "task" + list.listOfTodo[i].id)
       task = list.listOfTodo[i];
   }
-}
+}*/
 
 function addMyDay(e) {
 
 }
 function addDateOne(e) {
+  var dueDate = e.currentTarget.value;
   var listId = findActivelist().id;
-  var taskId = e.target.parentNode.id;
+  var taskId = getElementsByClass("side-content side-content-open").id;
+ // console.log("List-ID: "+listId);
+   //console.log("Task-ID: "+taskId);
   var list = getListbyId(listId);
-
-  console.log(task);
-  task.dueDate = getElementsByClass("dateoneOne").value;
-  alert(task.dueDate);
-
-  getElementsByClass("dateOne").innerHTML = task.dueDate;
-  getElementsByClass("dateoneOne").toggle("dateoneOne-toggle");
-
-  getElementsByClass("dateoneOne").style.display = "none";
-}
-
-function addDateTwo(e) {
-  var listId = findActivelist().id;
-  var taskId = e.target.parentNode.id;
-  var list = getListbyId(listId);
+  //console.log("List is: "+list);
+  var task:toDo;
   for (let i = 0; i < list.listOfTodo.length; i++) {
     if (taskId === "task" + list.listOfTodo[i].id)
       task = list.listOfTodo[i];
   }
   console.log(task);
-  task.reminder = getElementsByClass("datetwoTwo").value;
+  alert("Task is: "+task); 
+  alert("DateOneone: "+(<HTMLInputElement>getElementsByClass("dateoneOne")).value);
+  task.dueDate = (<HTMLInputElement>getElementsByClass("dateoneOne")).value;
+  alert(task.dueDate);
+//  var sideNav = getElementsByClass("side-nav");
+ // sideNav.classList.toggle("sidenav-collapse");
+ //var input = (<HTMLInputElement> getElementsByClass("innerspan-input"));
+ //console.log("VALUEEE: "+input.value);
+
+  getElementsByClass("dateOne").innerHTML = task.dueDate;
+ // getElementsByClass("dateoneOne").classList.toggle("dateoneOne-toggle");
+
+ (<HTMLElement>getElementsByClass("dateoneOne")).style.display = "none";
+
+  //getElementsByClass("dateoneOne").style.display = "none";
+}
+
+function addDateTwo(e) {
+  var reminder = e.currentTarget.value;
+  console.log("Reminder is:"+reminder);
+  var listId = findActivelist().id;
+  var taskId = getElementsByClass("side-content side-content-open").id;
+ // console.log("List-ID: "+listId);
+   //console.log("Task-ID: "+taskId);
+  var list = getListbyId(listId);
+  //console.log("List is: "+list);
+  var task:toDo;
+  for (let i = 0; i < list.listOfTodo.length; i++) {
+    if (taskId === "task" + list.listOfTodo[i].id)
+      task = list.listOfTodo[i];
+  }
+  console.log(task);
+  //alert("AddDateTwo");
+ // var input = (<HTMLInputElement> getElementsByClass("innerspan-input"));
+  //console.log("VALUEEE: "+input.value);
+  
+  task.reminder = (<HTMLInputElement>getElementsByClass("datetwoTwo")).value;
   alert(task.reminder);
   getElementsByClass("dateTwo").innerHTML = task.reminder;
-  getElementsByClass("datetwoTwo").style.display = "none";
+  (<HTMLElement>getElementsByClass("datetwoTwo")).style.display = "none";
 }
 
 function addNote(e) {
   var note = e.currentTarget.value;
+  console.log("note is:"+note);
   var listId = findActivelist().id;
-  var taskId = e.target.parentNode.id;
-  //alert("task ID: "+taskId);
-  //  console.log(taskId);
+  var taskId = getElementsByClass("side-content side-content-open").id;
+ // console.log("List-ID: "+listId);
+   //console.log("Task-ID: "+taskId);
   var list = getListbyId(listId);
+  //console.log("List is: "+list);
+  var task:toDo;
   //  console.log("list is: "+list);
   for (let i = 0; i < list.listOfTodo.length; i++) {
     if (taskId === "task" + list.listOfTodo[i].id)
-      task = list.listOfTodo[i];
+       task = list.listOfTodo[i];
     //alert("Task found");
   }
   task.note = note;
@@ -212,17 +297,17 @@ function addNote(e) {
   //alert("Note is: "+ e.currentTarget.value);
 }
 function enterReminder(e) {
-  getElementsByClass("datetwoTwo").style.display = "block";
+  (<HTMLInputElement>getElementsByClass("datetwoTwo")).style.display = "block";
 
 }
 
 function enterDate(e) {
-  document.getElementsByClassName("dateoneOne")[0].classList.toggle("dateoneOne-toggle");
-  //getElementsByClass("dateoneOne").style.display = "block";
+  //document.getElementsByClassName("dateoneOne")[0].classList.toggle("dateoneOne-toggle");
+  (<HTMLInputElement>getElementsByClass("dateoneOne")).style.display = "block";
 }
 
 function showButton(e) {
-  getElementsByClass("add-class").style.display = "block";
+  (<HTMLInputElement>getElementsByClass("add-class")).style.display = "block";
 }
 
 function showListTasks(listObj) {
@@ -235,19 +320,19 @@ function showListTasks(listObj) {
     var j = i + 1;
     var task = listObj.listOfTodo[i];
     console.log("Task is: " + task);
-    newList = createHTMLElement("li", "item");
+   var  newList = createHTMLElement("li", "item");
     newList.setAttribute("id", "task" + task.id);
     if (task.isChecked) {
-      leftButton = createHTMLElement("button", "fa fa-check-circle listButton1");
+     var leftButton = createHTMLElement("button", "fa fa-check-circle listButton1");
     } else {
       leftButton = createHTMLElement("button", "fa fa-circle-thin listButton1");
 
     }
-    content = createHTMLElement('span', 'span');
-    newText = document.createTextNode(task.name);
+   var content = createHTMLElement('span', 'span');
+  var  newText = document.createTextNode(task.name);
     content.appendChild(newText);
     if (task.isImportant) {
-      rightButton = createHTMLElement('button', 'fa fa-star  listButton2 right-float');
+     var rightButton = createHTMLElement('button', 'fa fa-star  listButton2 right-float');
     } else {
       rightButton = createHTMLElement('button', 'fa fa-star-o  listButton2 right-float');
     }
@@ -255,9 +340,9 @@ function showListTasks(listObj) {
     newList.appendChild(content);
     newList.appendChild(rightButton);
     mainList.insertBefore(newList, mainList.lastChild);
-    document.getElementsByClassName("add-class")[0].style.display = "none";
-    newList.addEventListener('click', toggleRightSideBar, false);
-    leftButton.addEventListener('click', enableClick, false);
+    (<HTMLInputElement>getElementsByClass("add-class")[0]).style.display = "none";
+    leftButton.addEventListener(clickEvent, enableClick, false);
+    newList.addEventListener(clickEvent, toggleRightSideBar, false);
     addInput.placeholder = "Add a Task";
     addInput.value = "";
     addButton.classList.toggle("fa-circle-thin");
@@ -270,19 +355,20 @@ function showListTasks(listObj) {
 
 }
 
-function showLists(e) {
+function showLists(e:any):void {
   allList.forEach(task => {
     task.active = false;
   });
-  closeRightSlider();
+  closeRightSlider(e);
   //  alert(findTargetListIndex(e));
   //alert("showList fn..Index: "+e);
-  var listObj = allList[e];
+  var listObj:myList = allList[e];
 
   //alert("List Name: "+list.name);
-  console.log("List Obj" + listObj);
-  var list = getElementsByClass("ul");
+  //console.log("List Obj" + listObj);
   listObj.active = true;
+    var list:Element = getElementsByClass("ul");
+
   getElementsByClass("heading").innerHTML = listObj.name;
 
   showListTasks(listObj);
@@ -293,15 +379,20 @@ function showLists(e) {
 
 }
 
-function createList(e) {
+function createList(e):void {
   var ul = getElementsByClass("inner-ul");
-  var input = getElementsByClass("innerspan-input");
+  var input = (<HTMLInputElement> getElementsByClass("innerspan-input"));
+  console.log("VALUEEE: "+input.value);
   if (input.value.trim() === '' || input.value === "New List") {
-    doc.getElementsByClassName("innerspan-input")[0].focus();
+    (<HTMLInputElement>getElementsByClass("innerspan-input")).focus();
   }
   else {
     // alert(input.value);
-    var listObj = List(input.value, 0);
+   // var listObj:myList = List(input.value, 0);
+  // (id,name,numberofTasks,active,listOfTodo
+  var listObj = new myList(++listId,input.value,0,true,[]); 
+   console.log(listObj);
+
     allList.push(listObj);
     console.log(allList);
     //   list.removeChild(list.lastChild);
@@ -312,10 +403,10 @@ function createList(e) {
     var li1 = document.createElement("li");
     li1.classList.add("list-item");
     li1.setAttribute("id", "list" + listObj.id);
-    li1.addEventListener("click", findTargetListIndex);
+    li1.addEventListener(clickEvent, findTargetListIndex);
     ul.insertBefore(li1, ul.lastChild.previousSibling);
     li1.innerHTML = "<button class='fa fa-list-ul button-class'></button><span class='innerspan mylist-innerspan'>" + input.value + "</span>";
-    getElementsByClass("fa-list-ul").addEventListener("click", findTargetListIndex);
+    getElementsByClass("fa-list-ul").addEventListener(clickEvent, findTargetListIndex);
 
     input.value = null;
     input.placeholder = "New List";
@@ -328,16 +419,17 @@ function createList(e) {
 }
 
 
-function toggleRightSideBar(e) {
+function toggleRightSideBar(e):void {
   var listId = findActivelist().id;
   var taskId = e.target.parentNode.id;
   //alert("task ID: "+taskId);
-  //  console.log(taskId);
+   console.log("RIGHT BAR TASK ID: "+taskId);
   var list = getListbyId(listId);
+  var task;
   //  console.log("list is: "+list);
   for (var i = 0; i < list.listOfTodo.length; i++) {
     if (taskId === "task" + list.listOfTodo[i].id)
-      task = list.listOfTodo[i];
+     task = list.listOfTodo[i];
     //alert("Task found");
   }
   //var taskSelect = getElementsByClass('task-select');
@@ -361,23 +453,23 @@ function toggleRightSideBar(e) {
     important = 'fa fa-star-o important';
 
   }
-  if (task.reminder != null) {
+  if (task.reminder != "") {
     getElementsByClass("dateTwo").innerHTML = task.reminder;
   } else {
     getElementsByClass("dateTwo").innerHTML = "Remind Me";
   }
 
-  if (task.dueDate != null) {
+  if (task.dueDate != "") {
     getElementsByClass("dateOne").innerHTML = task.dueDate;
   } else {
     
     getElementsByClass("dateOne").innerHTML = "Due Date";
   }
   //alert(task.note);
-  if (task.note != null) {
-    getElementsByClass("note").value = task.note;
+  if (task.note != "") {
+    (<HTMLInputElement>getElementsByClass("note")).value = task.note;
   } else {
-    getElementsByClass("note").value = "";
+    (<HTMLInputElement> getElementsByClass("note")).value = "";
   }
   getElementsByClass('right-top-content-one').innerHTML = "<div class = 'content'><button class='" + taskSelect + "' aria-hidden='true'></button><span class='content-span'>" + task.name + "</span><button class='" + important + "'float-r pointer task-important' aria-hidden='true'></button></div>";
 
@@ -386,7 +478,7 @@ function toggleRightSideBar(e) {
   var contentSpan = getElementsByClass("content-span");
   getElementsByClass("side-content").id = taskId;
   //contentSpan.innerHTML = task.name;
-  sideContent.classList.toggle("side-content-open");
+  sideContent.classList.add("side-content-open");
 
   //sideContent.style.display = "block";
   //listContent.style.width = "97%";
@@ -395,8 +487,8 @@ function toggleRightSideBar(e) {
 
 
 
-function closeRightSlider(e) {
-  document.getElementsByClassName("active").className = "span";
+function closeRightSlider(e):void {
+  //(<HTMLElement>getElementsByClass("active")).className = "span";
   getElementsByClass("content-span").innerHTML = "";
   getElementsByClass("note").innerHTML = "";
   var sideContent = document.getElementsByClassName("side-content")[0];
@@ -410,7 +502,7 @@ function closeRightSlider(e) {
 }
 
 
-function toggleLeftSideBar(e) {
+function toggleLeftSideBar(e):void {
   var sideNav = getElementsByClass("side-nav");
   var innerSpan = doc.getElementsByClassName("innerspan");
   sideNav.classList.toggle("sidenav-collapse");
@@ -431,7 +523,7 @@ sideNav.style.width = "25%";
 }*/
 }
 
-function findActivelist() {
+function findActivelist():myList {
   var currentList;
   allList.forEach(list => {
     if (list.active) {
@@ -445,24 +537,25 @@ function findActivelist() {
 
 
 var addButton = document.getElementsByClassName('click-plus')[0];
-var addInput = document.getElementsByClassName("input-text")[0];
+var addInput = (<HTMLInputElement>getElementsByClass("input-text"));
 var hiddenButton = document.getElementsByClassName("add-class")[0];
 
-function addTask() {
+function addTask():void {
   //console.log("ADD DIV"+addlistDiv);
   if (addInput.value.trim() === '' || addInput.value === "Add a Task") {
-    document.getElementsByClassName("input-text")[0].focus();
+    (<HTMLInputElement>document.getElementsByClassName("input-text")[0]).focus();
   } else {
     var list = getElementsByClass("ul");
     //  newList = createHTMLElement("li", "item");
 
 
-    console.log("input" + addInput.value);
-    var listObj = new ToDo(addInput.value);
+    console.log();
+
+    var listObj = new toDo (++taskId,addInput.value,false,false,"","","","");
     var newList = createElement({ name: 'li', attribute: { class: 'item', id: "task" + listObj.id } });
     //  elementObj.addEventListener(element.attribute.eventAction, element.attribute.eventSuccessFunction, element.attribute.useCapture);
 
-    var leftButton = createElement({ name: "button", attribute: { class: "fa fa-circle-thin listButton1", eventAction: 'click', eventSuccessFunction: enableClick, useCapture: "false" } });
+    var leftButton = createElement({ name: "button", attribute: { class: "fa fa-circle-thin listButton1", eventAction: clickEvent, eventSuccessFunction: enableClick, useCapture: "false" } });
     var content = createElement({ name: 'span', attribute: { class: 'span' } });
     //  console.log(listObj);
     var newText = document.createTextNode(listObj.name);
@@ -471,17 +564,17 @@ function addTask() {
     activeList.listOfTodo.push(listObj);
     console.log("ACTIVE LIST: " + activeList);
     content.appendChild(newText);
-    var rightButton = createElement({ name: "button", attribute: { class: "fa fa-star-o listButton2 right-float", eventAction: 'click', eventSuccessFunction: enableStar, useCapture: "false" } });
+    var rightButton = createElement({ name: "button", attribute: { class: "fa fa-star-o listButton2 right-float", eventAction: clickEvent, eventSuccessFunction: enableStar, useCapture: "false" } });
     newList.appendChild(leftButton);
     newList.appendChild(content);
     newList.appendChild(rightButton);
     list.insertBefore(newList, list.lastChild);
-    document.getElementsByClassName("add-class")[0].style.display = "none";
+    (<HTMLElement>getElementsByClass("add-class")).style.display = "none";
     addInput.placeholder = "Add a Task";
     addInput.value = "";
     //  addButton.classList.toggle("fa-circle-thin");
     //getElementsByClass("item",toggleRightSideBar,false);
-    newList.addEventListener('click', toggleRightSideBar, false);
+    newList.addEventListener(clickEvent, toggleRightSideBar, false);
 
 
     /*    items =  getElementsByClass("item");
@@ -492,23 +585,23 @@ function addTask() {
 
 };
 
-hiddenButton.addEventListener('click', addTask, false);
+hiddenButton.addEventListener(clickEvent, addTask, false);
 
-function add(e) {
+function add(e):void {
   addButton.classList.toggle("fa-circle-thin");
   if (addInput.value.trim() === '' || addInput.value === "Add a Task") {
-    document.getElementsByClassName("input-text")[0].focus();
-    document.getElementsByClassName("add-class")[0].style.display = "block";
+    (<HTMLInputElement>getElementsByClass("input-text")).focus();
+    (<HTMLElement>getElementsByClass("add-class")).style.display = "block";
   } else {
 
     var items = document.getElementsByClassName("item");
     for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener('click', toggleRightSideBar, false);
+      items[i].addEventListener(clickEvent, toggleRightSideBar, false);
     }
   }
   //items[length].
 };
-addButton.addEventListener('click', add, false);
+addButton.addEventListener(clickEvent, add, false);
 
 function showList(evt) {
   var list = getElementsByClass("ul");
@@ -524,13 +617,13 @@ function showList(evt) {
     newList.appendChild(content);
     newList.appendChild(rightButton);
     list.insertBefore(newList, list.lastChild);
-    document.getElementsByClassName("add-class")[0].style.display = "none";
+    (<HTMLElement>getElementsByClass("add-class")).style.display = "none";
     addInput.placeholder = "Add a Task";
     addInput.value = "";
     addButton.classList.toggle("fa-circle-thin");
     var items = document.getElementsByClassName("span");
     for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener('click', toggleRightSideBar, false);
+      items[i].addEventListener(clickEvent, toggleRightSideBar, false);
     }
   }
 }
@@ -552,7 +645,7 @@ function deleteTask(e) {
     }
   }
   showListTasks(task);
-  closeRightSlider();
+  closeRightSlider(e);
 }
 
 function enableStar(e) {

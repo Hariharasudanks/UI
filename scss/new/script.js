@@ -167,7 +167,11 @@ function addDateOne(e) {
   var listId = findActivelist().id;
   var taskId = e.target.parentNode.id;
   var list = getListbyId(listId);
-
+  var task;
+  for (let i = 0; i < list.listOfTodo.length; i++) {
+    if (taskId === "task" + list.listOfTodo[i].id)
+      task = list.listOfTodo[i];
+  }
   console.log(task);
   task.dueDate = getElementsByClass("dateoneOne").value;
   alert(task.dueDate);
