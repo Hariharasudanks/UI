@@ -6,12 +6,13 @@ import TaskMap from './TaskMap';
 import Todo from './Todo';
 
 
-class Listcontent extends React.Component<{ activeList: number, setCurrentList: (index: number) => void, setCurrentTask: (index: number) => void }, { inputValue: string }> {
+class Listcontent extends React.Component<{ activeList: number, setCurrentList: (index: number) => void, setCurrentTask: (index: number) => void }, { inputValue: string}> {
 
   constructor(props: any) {
     super(props);
     this.state = {
       inputValue: "",
+      
     };
 
     // Initial state
@@ -51,7 +52,7 @@ class Listcontent extends React.Component<{ activeList: number, setCurrentList: 
       console.log("Active List is: "+list.getName());
       let taskLength = list.getListOfTodo().length;
       console.log("B4 Push length is: "+taskLength);
-      list.getListOfTodo().push(new Todo(++taskLength, this.state.inputValue, false, false, "Note", "", false, ""));
+      list.getListOfTodo().push(new Todo(++taskLength, this.state.inputValue, false, false, "", "", false, ""));
       console.log("list Size is: " + list.getListOfTodo().length);
     }
     // this.showInputFormToAddTask();
@@ -72,7 +73,7 @@ class Listcontent extends React.Component<{ activeList: number, setCurrentList: 
     return (
 
       <div className="list-content">
-        <div className="heading">
+        <div className="heading" contentEditable={true}>
           {(list == null ? "MyList" : list.getName())}
         </div>
 

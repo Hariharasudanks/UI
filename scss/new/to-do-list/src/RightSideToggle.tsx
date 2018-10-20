@@ -3,7 +3,77 @@ import * as React from 'react';
 import Store from './Store';
 import Todo from './Todo';
 
-export default class RightSideToggle  extends React.Component<{activeTask:number,activeList:number}>{
+export default class RightSideToggle  extends React.Component<{activeTask:number,activeList:number, currentSelectedTask:Todo, changeNote: (index: any) => void},{reminderFlag:boolean,dueDateFlag:boolean,noteFlag:boolean, note:string}>{
+   
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      dueDateFlag:false,
+      note: "",
+      noteFlag : false,
+      reminderFlag:false,
+    };
+
+    // Initial state
+  }
+  
+  public changeReminderState = () => {
+    this.setState({
+      reminderFlag:true      
+
+    })
+   
+  }
+
+  public setChangedNote = (e:any)=>{
+   //  const note = e.target.value;
+     console.log("note is: " +this.state.note);
+    //  this.props.changeNote(this.state.note);
+     this.setState({
+      noteFlag : true
+   })
+  }
+   public onChangeNote = (e:any)=>{
+    const note = e.target.value;
+   this.props.changeNote(note);
+
+  //   this.setState({
+  //     note: note1,
+  //     // noteFlag: false
+  //  })
+  //   // console.log("note is: " +note);
+     // this.props.changeNote(note);
+      // this.props.onChangeNote()
+    }
+  public changeNoteState = () =>{
+    this.setState({
+       noteFlag:true
+    })
+  }
+  public changeDueDateState = () => {
+    this.setState({
+      dueDateFlag:true      
+
+    })
+   
+  }
+
+  public setDueDateState = (e:any) => {
+    this.props.currentSelectedTask.setdueDate(e.target.value);
+    this.setState({
+      dueDateFlag:false      
+
+    })
+   
+  }
+  public setReminder = (e:any)=>{
+    this.props.currentSelectedTask.setreminder(e.target.value);
+    this.setState({
+      reminderFlag:false      
+
+    })
+   // console.log("")
+  }
 
     public findListById(listId: number) {
         let list;
@@ -24,7 +94,7 @@ export default class RightSideToggle  extends React.Component<{activeTask:number
      for(const task of list.getListOfTodo() ){
          if(index === task.getId()){
              taskItem = task
-            alert("Task: "+task.getId() +"found");
+            // alert("Task: "+task.getId() +"found");
              }
 
      }
@@ -33,17 +103,64 @@ export default class RightSideToggle  extends React.Component<{activeTask:number
     return taskItem;
  }
 public render(){
-     const task = this.findTaksById(this.props.activeTask) === undefined? new Todo(0,"",false,false,"","",false,"")
+     /* const task = this.findTaksById(this.props.activeTask) === undefined? new Todo(0,"",false,false,"","",false,"")
      :this.findTaksById(this.props.activeTask);
+     */
+     const task = (this.props.currentSelectedTask === null ? new Todo(0,"",false,false,"","",false,"")
+     :this.props.currentSelectedTask);
     return(    
     <div className= {"side-content" + (this.props.activeTask !== -1? " side-content-open" :"") }>
     <div className="content">
+    <div className="right-top-content-one">
     <button className="fa fa-circle-thin button class"/>
   <span className="content-span">{task!.getName()}</span>
   <button className="fa fa-star-o right-float" aria-hidden="true"/>
+  </div>
+</div>
+<br/>
+  <div className="right-top-content-two">
+    <div className="content-2">
+    <button className="fa fa-sun-o button-class "/>
+    <span>Add to my day</span>
+  </div>
+</div>
+<br/>
+<div className="right-top-content-three">
+  <div className="content-3">
+    <div className="inner-div-1">
+  <button className="fa fa-clock-o button-class "/>
+    <div className="inner-div-2">
+  <span className="dateTwo" onClick={this.changeReminderState}>{task.getreminder() === "" ?"Reminfd Me":task.getreminder()}</span>
+  <input className={"datetwoTwo" + (this.state.reminderFlag === true? " datetwoTwo-toggle": "")} type ="date" onBlur ={this.setReminder}/>
+</div>
+<br/>
+<div className="inner-div-1">
+<button className="fa fa-calendar button-class "/>
+</div>
+<div className="inner-div-2">
+<span className="dateOne" onClick={this.changeDueDateState}>{task.getdueDate() === "" ?"Add Due Date":task.getdueDate()}</span>
+<input className={"dateoneOne"+ (this.state.dueDateFlag === true? " dateoneOne-toggle": "")} type ="date" onBlur ={this.setDueDateState}/>
+</div>
+<br/>
+<div className="inner-div-1">
+<button className="fa fa-repeat button-class "/>
+</div>
+<div className="inner-div-2">
+<span>Repeat</span>
+</div>
+
+</div>
+</div>
+<br/>
+<div className="right-top-content-four">
+  <div className="content-4">
+  <textarea className="note" rows={4} cols={50} onChange={this.onChangeNote}  value ={task.getNote()} placeholder="Add a note..."/>
+ </div>
+</div> 
 
     </div>
-  </div>
+
+    </div>
     );
 
 }

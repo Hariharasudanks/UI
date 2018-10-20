@@ -17,7 +17,7 @@ class Todo  {
     this.note = note;
     this.dueDate = dueDate;
     this.addtoDay = addtoDay;
-    this.reminder = this.reminder;
+    this.reminder = reminder;
 
   }
   public getId():number{

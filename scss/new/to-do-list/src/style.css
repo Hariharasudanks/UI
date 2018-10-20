@@ -499,12 +499,6 @@ button {
   display: -ms-inline-flexbox;
   display: inline-flex;
   border-bottom: 1px solid lightgrey;
-  /* .dateoneOne-toggle{
-        padding-left: 30px;
-        outline: none;
-        display: block;
-        border: none;
-        }*/
 }
 
 #root .App .contents .side-content .right-top-content-three .content-3 .inner-div-2 span {
@@ -519,6 +513,13 @@ button {
   border: none;
 }
 
+#root .App .contents .side-content .right-top-content-three .content-3 .inner-div-2 .dateoneOne-toggle {
+  padding-left: 30px;
+  outline: none;
+  display: block;
+  border: none;
+}
+
 #root .App .contents .side-content .right-top-content-three .content-3 .inner-div-2 .datetwoTwo {
   padding-left: 30px;
   outline: none;
@@ -526,10 +527,10 @@ button {
   border: none;
 }
 
-#root .App .contents .side-content .right-top-content-three .content-3 .datetwoTwo-toggle {
+#root .App .contents .side-content .right-top-content-three .content-3 .inner-div-2 .datetwoTwo-toggle {
   padding-left: 30px;
   outline: none;
-  display: none;
+  display: block;
   border: none;
 }
 
